@@ -1,7 +1,10 @@
 ## Put comments here that give an overall description of what your
 ## functions do
 
-## makeCacheMatrix creates a list that stores a matrix and its inverse
+## makeCacheMatrix creates a special matrix object (a list)
+## that stores a matrix and its inverse
+## 'x' is a matrix object that will be used to create the 
+## special matrix object
 makeCacheMatrix <- function(x = matrix()) {
   xInv <- NULL ## xInv stores the inverse of the matrix x
   ## set is used to set the matrix in the cacheMatrix
@@ -22,6 +25,9 @@ makeCacheMatrix <- function(x = matrix()) {
 ## cacheSolve takes in special cachematrix x and solves for its inverse
 ## IF an inverse was not previously calculated, otherwise returns the
 ## cached inverse matrix
+## 'x' is the special cachematrix created from the makeCacheMatrix() function
+## cacheSolve also takes in additional arguments that are used by the solve() 
+## function
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
   inv <- x$getInv()
@@ -30,7 +36,7 @@ cacheSolve <- function(x, ...) {
     return(inv)
   }
   mat <- x$get()
-  inv <- solve(mat)
+  inv <- solve(mat,...)
   x$setInv(inv)
   inv
 }
